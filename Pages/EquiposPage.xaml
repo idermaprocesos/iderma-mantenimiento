@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="MantenimientoCapilar.Pages.EquiposPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    NavigationCacheMode="Enabled">
+    <Grid Padding="32,24,32,24" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <StackPanel Spacing="4">
+            <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Equipos e instrumental" />
+            <TextBlock
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                Text="Ficha de cada máquina: ubicación, estado y próximo seguimiento." />
+        </StackPanel>
+
+        <Grid Grid.Row="1" ColumnSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="380" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Grid RowSpacing="8">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <AutoSuggestBox
+                    x:Name="Buscar"
+                    PlaceholderText="Buscar por nombre, serie o sala"
+                    QueryIcon="Find"
+                    TextChanged="Buscar_TextChanged" />
+                <ComboBox
+                    x:Name="Categorias"
+                    Grid.Row="1"
+                    HorizontalAlignment="Stretch"
+                    SelectionChanged="Categorias_SelectionChanged" />
+                <Grid Grid.Row="2">
+                    <ListView
+                        x:Name="Lista"
+                        ItemContainerStyle="{StaticResource FilaListaEstilo}"
+                        ItemTemplate="{StaticResource FilaPlantilla}"
+                        SelectionChanged="Lista_SelectionChanged"
+                        ItemsSource="{x:Bind Filas}" />
+                    <TextBlock
+                        x:Name="Vacio"
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Ningún equipo coincide con el filtro."
+                        Visibility="Collapsed" />
+                </Grid>
+            </Grid>
+
+            <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Spacing="12">
+                    <TextBlock
+                        x:Name="DetalleVacio"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Selecciona un equipo." />
+                    <StackPanel x:Name="Detalle" Spacing="12" Visibility="Collapsed">
+                        <StackPanel Spacing="4">
+                            <TextBlock x:Name="Codigo" Style="{ThemeResource CaptionTextBlockStyle}" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                            <TextBlock x:Name="Titulo" Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="Wrap" />
+                            <StackPanel Orientation="Horizontal" Spacing="8">
+                                <Ellipse x:Name="EstadoPunto" Width="8" Height="8" VerticalAlignment="Center" />
+                                <TextBlock x:Name="EstadoTexto" VerticalAlignment="Center" />
+                            </StackPanel>
+                        </StackPanel>
+
+                        <Border Style="{StaticResource Tarjeta}">
+                            <Grid ColumnSpacing="16" RowSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Marca y modelo" />
+                                    <TextBlock x:Name="MarcaModelo" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Número de serie" />
+                                    <TextBlock x:Name="Serie" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Categoría" />
+                                    <TextBlock x:Name="CategoriaTexto" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="1" Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Ubicación" />
+                                    <TextBlock x:Name="Ubicacion" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Responsable" />
+                                    <TextBlock x:Name="Responsable" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="2" Grid.Column="1" Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Intervalos" />
+                                    <TextBlock x:Name="Intervalos" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+
+                        <Border Style="{StaticResource Tarjeta}">
+                            <StackPanel Spacing="12">
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Seguimiento" />
+                                <StackPanel Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Próxima orden abierta" />
+                                    <TextBlock x:Name="ProximaOrden" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Calibración" />
+                                    <TextBlock x:Name="EstadoCalibracion" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <Button x:Name="AbrirCertificado" HorizontalAlignment="Left" Click="AbrirCertificado_Click">
+                                    Abrir certificado
+                                </Button>
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Tarjeta}">
+                            <StackPanel Spacing="8">
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Notas de uso" />
+                                <TextBlock x:Name="Notas" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+
+                        <Border Style="{StaticResource Tarjeta}">
+                            <StackPanel Spacing="8">
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Órdenes recientes" />
+                                <ItemsControl x:Name="Historial" />
+                            </StackPanel>
+                        </Border>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

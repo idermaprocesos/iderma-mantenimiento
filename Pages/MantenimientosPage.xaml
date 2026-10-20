@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="MantenimientoCapilar.Pages.MantenimientosPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    NavigationCacheMode="Enabled">
+    <Grid Padding="32,24,32,24" RowSpacing="16">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <StackPanel Spacing="4">
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Mantenimiento" />
+                <TextBlock
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Text="Preventivos, correctivos y limpiezas del quirófano y la esterilización." />
+            </StackPanel>
+            <StackPanel Grid.Column="1" Orientation="Horizontal" Spacing="8" VerticalAlignment="Top">
+                <ComboBox x:Name="Filtros" Width="180" SelectionChanged="Filtros_SelectionChanged" />
+                <Button Click="ExportarLista_Click" Content="Exportar PDF" />
+                <Button Click="Nueva_Click" Style="{ThemeResource AccentButtonStyle}">
+                    <StackPanel Orientation="Horizontal" Spacing="8">
+                        <FontIcon FontSize="12" Glyph="&#xE710;" />
+                        <TextBlock Text="Nueva orden" />
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </Grid>
+
+        <Grid Grid.Row="1" ColumnSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="420" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid>
+                <ListView
+                    x:Name="Lista"
+                    ItemContainerStyle="{StaticResource FilaListaEstilo}"
+                    ItemTemplate="{StaticResource FilaPlantilla}"
+                    ItemsSource="{x:Bind Filas}"
+                    SelectionChanged="Lista_SelectionChanged" />
+                <TextBlock
+                    x:Name="Vacio"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Text="No hay órdenes en este filtro."
+                    Visibility="Collapsed" />
+            </Grid>
+
+            <ScrollViewer Grid.Column="1" HorizontalScrollBarVisibility="Disabled">
+                <StackPanel Spacing="12">
+                    <TextBlock
+                        x:Name="DetalleVacio"
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        Text="Selecciona una orden." />
+                    <StackPanel x:Name="Detalle" Spacing="12" Visibility="Collapsed">
+                        <StackPanel Spacing="4">
+                            <TextBlock x:Name="Codigo" Style="{StaticResource EtiquetaCampo}" />
+                            <TextBlock x:Name="Titulo" Style="{ThemeResource TitleTextBlockStyle}" TextWrapping="Wrap" />
+                            <TextBlock x:Name="EstadoLinea" />
+                        </StackPanel>
+                        <Border Style="{StaticResource Tarjeta}">
+                            <Grid ColumnSpacing="16" RowSpacing="12">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <StackPanel Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Tipo" />
+                                    <TextBlock x:Name="TipoTexto" />
+                                </StackPanel>
+                                <StackPanel Grid.Column="1" Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Responsable" />
+                                    <TextBlock x:Name="Tecnico" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Fecha programada" />
+                                    <TextBlock x:Name="FechaProgramada" TextWrapping="Wrap" />
+                                </StackPanel>
+                                <StackPanel Grid.Row="1" Grid.Column="1" Spacing="2">
+                                    <TextBlock Style="{StaticResource EtiquetaCampo}" Text="Ejecución" />
+                                    <TextBlock x:Name="FechaEjecucion" TextWrapping="Wrap" />
+                                </StackPanel>
+                            </Grid>
+                        </Border>
+                        <Border Style="{StaticResource Tarjeta}">
+                            <StackPanel Spacing="8">
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Trabajo" />
+                                <TextBlock x:Name="Descripcion" IsTextSelectionEnabled="True" TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                        <Border Style="{StaticResource Tarjeta}">
+                            <StackPanel Spacing="8">
+                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Cierre" />
+                                <TextBox
+                                    x:Name="Hallazgos"
+                                    AcceptsReturn="True"
+                                    MinHeight="96"
+                                    PlaceholderText="Qué se encontró y si el equipo quedó apto"
+                                    TextWrapping="Wrap" />
+                                <Button
+                                    x:Name="BotonCerrar"
+                                    HorizontalAlignment="Left"
+                                    Click="Cerrar_Click"
+                                    Style="{ThemeResource AccentButtonStyle}">
+                                    Cerrar orden
+                                </Button>
+                            </StackPanel>
+                        </Border>
+                        <StackPanel Orientation="Horizontal" Spacing="8">
+                            <Button x:Name="BotonExportarOrden" Click="ExportarOrden_Click" Content="Exportar esta orden" />
+                            <HyperlinkButton x:Name="VerEquipo" VerticalAlignment="Center" Click="VerEquipo_Click" Content="Ver ficha del equipo" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Page>

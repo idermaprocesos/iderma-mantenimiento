@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentDialog
+    x:Class="MantenimientoCapilar.Dialogos.DialogoCalibracion"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Registrar calibración"
+    PrimaryButtonText="Guardar certificado"
+    CloseButtonText="Cancelar"
+    DefaultButton="Primary"
+    PrimaryButtonClick="Guardar_Click">
+    <ScrollViewer MaxHeight="640" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="12" Width="640">
+            <TextBlock
+                Text="Compara el instrumento con un patrón y anota cada punto. El certificado de ejemplo del termómetro de folículos ya está en el listado."
+                TextWrapping="Wrap"
+                Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+            <InfoBar x:Name="Aviso" IsOpen="False" IsClosable="False" />
+            <ComboBox
+                x:Name="Equipos"
+                Header="Equipo"
+                HorizontalAlignment="Stretch"
+                SelectionChanged="Equipo_SelectionChanged" />
+            <Grid ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <CalendarDatePicker
+                    x:Name="Fecha"
+                    Header="Fecha de calibración"
+                    HorizontalAlignment="Stretch" />
+                <TextBox
+                    x:Name="Tecnico"
+                    Grid.Column="1"
+                    Header="Responsable" />
+            </Grid>
+            <TextBox
+                x:Name="Patron"
+                Header="Patrón"
+                PlaceholderText="Instrumento patrón y sonda o masas utilizadas" />
+            <TextBox
+                x:Name="CertificadoPatron"
+                Header="Certificado del patrón"
+                PlaceholderText="Número y vigencia del patrón" />
+            <Grid ColumnSpacing="12">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="160" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="Unidad" Header="Unidad" />
+                <NumberBox
+                    x:Name="Tolerancia"
+                    Grid.Column="1"
+                    Header="Tolerancia"
+                    Minimum="0"
+                    SmallChange="0.01"
+                    SpinButtonPlacementMode="Compact"
+                    ValueChanged="Dato_Changed" />
+                <TextBox
+                    x:Name="Criterio"
+                    Grid.Column="2"
+                    Header="Criterio de aceptación" />
+            </Grid>
+            <TextBox
+                x:Name="Condiciones"
+                Header="Condiciones"
+                PlaceholderText="Temperatura, humedad, montaje" />
+            <TextBox
+                x:Name="Procedimiento"
+                Header="Procedimiento"
+                PlaceholderText="Método, tiempo de estabilización y referencia interna"
+                TextWrapping="Wrap" />
+
+            <TextBlock Style="{ThemeResource BodyStrongTextBlockStyle}" Text="Puntos de comparación" />
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{ThemeResource CaptionTextBlockStyle}" Text="Punto" />
+                <TextBlock Grid.Column="1" Style="{ThemeResource CaptionTextBlockStyle}" Text="Patrón" />
+                <TextBlock Grid.Column="2" Style="{ThemeResource CaptionTextBlockStyle}" Text="Lectura" />
+            </Grid>
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="Nombre1" PlaceholderText="Banda baja · 2 °C" TextChanged="DatoTexto_Changed" />
+                <NumberBox x:Name="Patron1" SmallChange="0.01" SpinButtonPlacementMode="Compact" ValueChanged="Dato_Changed" />
+                <NumberBox x:Name="Lectura1" Grid.Column="2" SmallChange="0.01" SpinButtonPlacementMode="Compact" ValueChanged="Dato_Changed" />
+            </Grid>
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="Nombre2" PlaceholderText="Consigna clínica · 4 °C" TextChanged="DatoTexto_Changed" />
+                <NumberBox x:Name="Patron2" SmallChange="0.01" SpinButtonPlacementMode="Compact" ValueChanged="Dato_Changed" />
+                <NumberBox x:Name="Lectura2" Grid.Column="2" SmallChange="0.01" SpinButtonPlacementMode="Compact" ValueChanged="Dato_Changed" />
+            </Grid>
+            <Grid ColumnSpacing="8">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="120" />
+                    <ColumnDefinition Width="120" />
+                </Grid.ColumnDefinitions>
+                <TextBox x:Name="Nombre3" PlaceholderText="Alarma alta · 8 °C" TextChanged="DatoTexto_Changed" />
+                <NumberBox x:Name="Patron3" SmallChange="0.01" SpinButtonPlacementMode="Compact" ValueChanged="Dato_Changed" />
+                <NumberBox x:Name="Lectura3" Grid.Column="2" SmallChange="0.01" SpinButtonPlacementMode="Compact" ValueChanged="Dato_Changed" />
+            </Grid>
+            <TextBox
+                x:Name="Observaciones"
+                Header="Observaciones"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                MinHeight="72" />
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentDialog
+    x:Class="MantenimientoCapilar.Dialogos.DialogoMantenimiento"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Nueva orden de mantenimiento"
+    PrimaryButtonText="Guardar"
+    CloseButtonText="Cancelar"
+    DefaultButton="Primary"
+    PrimaryButtonClick="Guardar_Click">
+    <ScrollViewer MaxHeight="560" HorizontalScrollBarVisibility="Disabled">
+        <StackPanel Spacing="12" Width="520">
+            <InfoBar
+                x:Name="Aviso"
+                IsOpen="False"
+                IsClosable="False"
+                Severity="Error"
+                Title="Revisa la orden" />
+            <ComboBox
+                x:Name="Equipos"
+                Header="Equipo"
+                HorizontalAlignment="Stretch"
+                PlaceholderText="Selecciona un equipo" />
+            <ComboBox
+                x:Name="Tipos"
+                Header="Tipo"
+                HorizontalAlignment="Stretch" />
+            <CalendarDatePicker
+                x:Name="Fecha"
+                Header="Fecha programada"
+                PlaceholderText="Elegir fecha"
+                HorizontalAlignment="Stretch" />
+            <TextBox x:Name="Tecnico" Header="Responsable" PlaceholderText="Área o técnico" />
+            <TextBox
+                x:Name="Descripcion"
+                Header="Trabajo a realizar"
+                PlaceholderText="Qué hay que revisar o corregir"
+                AcceptsReturn="True"
+                TextWrapping="Wrap"
+                MinHeight="96" />
+        </StackPanel>
+    </ScrollViewer>
+</ContentDialog>

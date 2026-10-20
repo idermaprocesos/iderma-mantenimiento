@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Page
+    x:Class="MantenimientoCapilar.Pages.SettingsPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ScrollViewer>
+        <StackPanel Padding="32,24,32,24" Spacing="16" MaxWidth="760" HorizontalAlignment="Left">
+            <StackPanel Spacing="4">
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Text="Ajustes" />
+                <TextBlock
+                    Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                    Text="Los registros de Iderma se guardan en este equipo." />
+            </StackPanel>
+
+            <InfoBar
+                x:Name="Aviso"
+                IsClosable="True"
+                IsOpen="False"
+                Severity="Success"
+                Title="Ejemplo restaurado"
+                Message="Vuelven el termómetro conforme, la balanza por vencer y la centrífuga no conforme." />
+
+            <Border Style="{StaticResource Tarjeta}">
+                <StackPanel Spacing="8">
+                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Clínica" />
+                    <TextBlock TextWrapping="Wrap" Text="Seguimiento de instrumental y equipos: extracción FUE, implantación, esterilización, PRP y cadena de frío de folículos." />
+                    <TextBlock x:Name="Resumen" Foreground="{ThemeResource TextFillColorSecondaryBrush}" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource Tarjeta}">
+                <StackPanel Spacing="12">
+                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="Archivo local" />
+                    <TextBox x:Name="Ruta" IsReadOnly="True" TextWrapping="Wrap" />
+                    <TextBlock
+                        Foreground="{ThemeResource TextFillColorSecondaryBrush}"
+                        TextWrapping="Wrap"
+                        Text="Restaurar reemplaza lo que haya guardado y vuelve a cargar el ejemplo, incluida la calibración CAL-2026-018 del termómetro de la nevera de folículos." />
+                    <Button HorizontalAlignment="Left" Click="Restaurar_Click" Content="Restaurar datos de ejemplo" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</Page>
